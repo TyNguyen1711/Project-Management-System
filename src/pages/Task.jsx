@@ -3,13 +3,14 @@ import { Plus, X } from "lucide-react";
 import TaskTable from "../components/TaskTable";
 import DatePickerFilter from "../components/DatePickerFilter";
 import FilterDropdown from "../components/FilterDropdown";
+import CreateTaskModal from "../components/CreateTaskModal";
 const MyTasksPage = () => {
   const [activeTab, setActiveTab] = useState("Table");
   const [selectedStatuses, setSelectedStatuses] = useState([]);
   const [selectedAssignees, setSelectedAssignees] = useState([]);
   const [selectedProjects, setSelectedProjects] = useState([]);
   const [selectedDueDate, setSelectedDueDate] = useState(null);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const projects = [
     {
       id: 1,
@@ -221,8 +222,8 @@ const MyTasksPage = () => {
     (selectedDueDate ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto p-6">
+    <div className="min-h-screen">
+      <div className="mx-auto px-8 py-6">
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
@@ -322,12 +323,20 @@ const MyTasksPage = () => {
               </button>
             )}
           </div>
-          <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 flex items-center gap-2">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 flex items-center gap-2 cursor-pointer"
+          >
             <Plus className="w-4 h-4" />
             New
           </button>
         </div>
-
+        <CreateTaskModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          projects={projects}
+          people={people}
+        />
         {/* Task Table Component */}
         <TaskTable tasks={filteredTasks} showProjectColumn={true} />
       </div>

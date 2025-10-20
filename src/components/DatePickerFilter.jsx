@@ -1,13 +1,5 @@
 import React, { useState, useMemo } from "react";
-import {
-  Plus,
-  ChevronDown,
-  MoreHorizontal,
-  X,
-  ArrowUpDown,
-  ArrowUp,
-  ArrowDown,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 const DatePickerFilter = ({
   label,
   icon,
