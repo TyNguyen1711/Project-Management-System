@@ -7,8 +7,10 @@ import {
   ChevronDown,
   Plus,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SidebarNavigation = () => {
+  const navigate = useNavigate();
   const [workspaces, setWorkspaces] = useState([
     {
       id: 1,
@@ -33,21 +35,14 @@ const SidebarNavigation = () => {
   const [activeMenu, setActiveMenu] = useState("home");
 
   const menuItems = [
-    { id: "home", icon: Home, label: "Home" },
-    { id: "tasks", icon: CheckSquare, label: "My Tasks" },
-    { id: "settings", icon: Settings, label: "Settings" },
-    { id: "members", icon: Users, label: "Members" },
+    { id: "home", icon: Home, label: "Home", path: "/" },
+    { id: "tasks", icon: CheckSquare, label: "My Tasks", path: "/task" },
+    { id: "settings", icon: Settings, label: "Settings", path: "/settings" },
+    { id: "members", icon: Users, label: "Members", path: "/members" },
   ];
 
   const getInitial = (name) => {
     return name ? name.charAt(0).toUpperCase() : "?";
-  };
-
-  const getColorClass = (index, type = "bg") => {
-    const colors = ["blue", "green", "purple", "yellow", "pink", "indigo"];
-    const color = colors[index % colors.length];
-    const shade = type === "bg" ? "500" : "600";
-    return `${type}-${color}-${shade}`;
   };
 
   return (
@@ -125,7 +120,10 @@ const SidebarNavigation = () => {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveMenu(item.id)}
+                onClick={() => {
+                  navigate(item.path);
+                  setActiveMenu(item.id);
+                }}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg mb-1 transition-colors ${
                   activeMenu === item.id
                     ? "bg-gray-200 text-gray-900"
