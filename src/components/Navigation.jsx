@@ -36,7 +36,7 @@ const SidebarNavigation = () => {
 
   const menuItems = [
     { id: "home", icon: Home, label: "Home", path: "/" },
-    { id: "tasks", icon: CheckSquare, label: "My Tasks", path: "/task" },
+    { id: "tasks", icon: CheckSquare, label: "My Tasks", path: "/tasks" },
     { id: "settings", icon: Settings, label: "Settings", path: "/settings" },
     { id: "members", icon: Users, label: "Members", path: "/members" },
   ];
